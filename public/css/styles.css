@@ -3,4 +3,264 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Days One", sans-serif;
+}
+
+
+
+/*HEADER*/
+#top-header {
+  display: flex;           
+  justify-content: space-between; 
+  align-items: center;   
+  padding: 15px 0px 35px 10px;
+  background-color: white; 
+}
+
+.siteName a {
+  text-decoration: none;
+  color: black;
+  font-size: 40px;
+}
+
+#tools a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+#tools a:hover {
+  text-decoration: underline;
+}
+
+
+
+/*NAVIGATION*/
+nav {
+  background-color: black;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li{
+  margin: 0 10px;
+}
+
+nav ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 17px;
+}
+nav ul li a:hover{
+  background-color: cyan;
+  color: black;
+}
+
+
+
+/*MAIN*/
+h1 {
+  padding: 20px;
+}
+
+.hero-image {
+  background-image: url("../images/vehicles/delorean-tn.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
+  display: flex;
+  align-items: center;        
+  justify-content: flex-start; 
+  padding-left: 1rem;        
+  color: white;
+  position: relative;
+}
+
+.hero-text {
+  background: rgba(255, 255, 255, 0.85); 
+  color: cyan;            
+  padding: 15px 20px;
+  max-width: 90%;
+  font-size: 15px;
+  text-align: left;         
+  border-radius: 0;         
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.features p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.image-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+.image-button img {
+  width: 120px;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+.image-button img:hover {
+  transform: scale(1.05);
+}
+
+
+section {
+  padding: 10px;
+}
+
+.delorean-sections {
+  display: block;
+  margin: 20px;
+}
+
+.dmc-delorean-reviews,
+.delorean-upgrades {
+  margin-bottom: 20px;
+}
+
+.dmc-delorean-reviews ul {
+  padding-left: 20px;
+}
+
+.dmc-delorean-reviews ul li {
+  padding-bottom: 10px;
+}
+
+h3 {
+  padding-bottom: 14px;
+  font-size: 25px;
+}
+
+.upgrades-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px; 
+  padding: 10px;
+}
+
+.upgrade-item {
+  text-align: center;
+}
+
+.upgrade-item img {
+  width: 100%;   
+  max-width: 150px; 
+  height: auto;
+  background-color: cyan;
+  border: 1px solid black;
+}
+
+h4 {
+
+}
+
+.upgrade-item h4 a {
+  text-decoration: underline;
+  color: navy;
+}
+
+
+
+/*FOOTER*/
+footer {
+  color: gray;
+  padding: 15px;
+}
+
+
+
+
+@media (min-width: 1024px) {
+  /******* Change Box Model ***************/
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-image: url('../images/site/small_check.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: white; 
+  }
+
+  #wrapper {
+    background-color: #ffffff; 
+    border: 5px solid cyan;
+    max-width: 1700px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  nav ul li {
+  margin: 0 75px;
+  }
+
+
+  .hero-image {
+    background-image: url("../images/vehicles/delorean.jpg"); 
+  }
+
+  .hero-text {
+    max-width: 40%;
+    padding: 20px 30px;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+  }
+
+  .features p {
+    font-size: 1rem;
+  }
+
+  .image-button img {
+    width: 150px;
+  }
+
+  .delorean-sections {
+    display: flex;
+    gap: 30px;
+  }
+
+  .delorean-upgrades {
+    order: 1; 
+    flex: 2;  
+  }
+
+  .dmc-delorean-reviews {
+    order: 2; 
+    flex: 1;  
+    margin-bottom: 0;
+  }
 }
