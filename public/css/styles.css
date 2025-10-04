@@ -82,23 +82,22 @@ h1 {
   background-image: url("../images/vehicles/delorean-tn.jpg");
   background-size: cover;
   background-position: center;
-  height: 100vh; 
-  display: flex;
-  align-items: center;        
-  justify-content: flex-start; 
-  padding-left: 1rem;        
-  color: white;
-  position: relative;
+  min-height: 60vh; /* Allows smaller screens to show content fully */
+  width: 100%;
 }
 
 .hero-text {
-  background: rgba(255, 255, 255, 0.85); 
-  color: cyan;            
-  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  color: cyan;
+  padding: 25px 30px;
   max-width: 90%;
-  font-size: 15px;
-  text-align: left;         
-  border-radius: 0;         
+  width: fit-content;      
+  font-size: 20px;
+  text-align: left;
+  border-radius: 0;
+  position: relative;       
+  left: 200;                
+  top: 150px;     
 }
 
 h2 {
@@ -186,7 +185,7 @@ h4 {
 
 /*FOOTER*/
 footer {
-  color: gray;
+  color: black;
   padding: 15px;
 }
 
@@ -229,11 +228,14 @@ footer {
 
   .hero-image {
     background-image: url("../images/vehicles/delorean.jpg"); 
+    min-height: 100vh;
   }
 
   .hero-text {
     max-width: 40%;
-    padding: 20px 30px;
+    padding: 20px 30px;      
+    left: 200;                
+    top: 250px; 
   }
 
   .hero-text h2 {
