@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const utilities = require("./utilities")
 
 /* ***********************
  * View Engine and Templates
@@ -25,11 +26,6 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(static)
 
-// File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
-
 // Index route
 app.get("/", baseController.buildHome)
 
@@ -42,6 +38,11 @@ app.use("/inv", inventoryRoute)
  *************************/
 const port = process.env.PORT
 const host = process.env.HOST
+
+// File Not Found Route - must be last route in list
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
 
 /* ***********************
 * Express Error Handler
