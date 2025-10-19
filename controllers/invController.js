@@ -19,6 +19,31 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build inventory by classification view
+ * ************************** */
+invCont.buildByInventoryId = async function (req, res, next) {
+  const inv_id = req.params.invId;
 
+  try {
+    const vehicleData = await invModel.getVehicleById(inv_id);
+
+    if (!vehicleData) {
+      return res.status(404).render("errors/404", { title: "Vehicle Not Found" });
+    }
+
+    const vehicleHTML = await utilities.buildVehicleDetail(vehicleData);
+    const nav = await utilities.getNav();
+
+    res.render("./inventory/detail", {
+      title: vehicleData.inv_make + " " + vehicleData.inv_model,
+      nav,
+      vehicleHTML,
+    });
+  } catch (error) {
+    console.error("Error building vehicle detail: " + error);
+    next(error);
+  }
+};
 
 module.exports = invCont

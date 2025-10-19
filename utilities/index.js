@@ -57,6 +57,35 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the vehicle view HTML
+* ************************************ */
+Util.buildVehicleDetail = async function(vehicle){
+  if (!vehicle) return '<p class="notice">Vehicle not found.</p>';
+
+  const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(vehicle.inv_price);
+  const mileageFormatted = new Intl.NumberFormat('en-US').format(vehicle.inv_miles);
+
+  let html = `
+    <div class="vehicle-detail-container">
+      <div class="vehicle-image">
+        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" />
+      </div>
+      <div class="vehicle-info">
+        <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
+        <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+        <p><strong>Price:</strong> ${priceFormatted}</p>
+        <p><strong>Mileage:</strong> ${mileageFormatted} miles</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Transmission:</strong> ${vehicle.inv_transmission}</p>
+        <p><strong>Body Style:</strong> ${vehicle.classification_name}</p>
+      </div>
+    </div>
+  `;
+  return html;
+};
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

@@ -183,6 +183,61 @@ h4 {
 
 
 
+/*VEHICLE DETAIL PAGE*/
+/* VEHICLE DETAIL VIEW */
+.vehicle-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 20px;
+  padding: 15px;
+  border: 2px solid cyan;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.vehicle-image {
+  flex: 1 1 400px;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+.vehicle-info {
+  flex: 1 1 400px;
+  font-family: "Montserrat", sans-serif;
+  color: black;
+}
+
+.vehicle-info h1 {
+  font-family: "Days One", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.vehicle-info p {
+  font-size: 1rem;
+  margin: 8px 0;
+}
+
+.vehicle-info strong {
+  color: cyan;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .vehicle-detail-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+
+
 /*FOOTER*/
 footer {
   color: black;
