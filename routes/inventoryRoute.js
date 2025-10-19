@@ -10,4 +10,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build inventory by detail view
 router.get("/detail/:invId", invController.buildByInventoryId);
 
+// Route for testing error handling
+router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
+
 module.exports = router;
