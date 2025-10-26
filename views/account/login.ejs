@@ -1,9 +1,18 @@
 <div class="login-container">
   <h1><%= title %></h1>
 
-  <!-- Flash Message -->
+  <!-- Flash Messages -->
   <% if (messages && messages.length > 0) { %>
     <div class="flash-message"><%= messages %></div>
+  <% } %>
+
+  <!-- Server-Side Validation Errors -->
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
   <% } %>
 
   <!-- Login Form -->
@@ -15,13 +24,7 @@
 
     <div class="form-group">
       <label for="account_password">Password:</label>
-      <span class="password-hint">
-        Passwords must be at least 12 characters, include 1 capital letter, 1 number, and 1 special character.
-      </span>
-      <input type="password" id="account_password" name="account_password" required
-             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
-             placeholder="Enter your password">
-      <button type="button" onclick="togglePassword()">Show/Hide</button>
+      <input type="password" name="account_password" id="accountPassword" required>
     </div>
 
     <button type="submit">Login</button>
