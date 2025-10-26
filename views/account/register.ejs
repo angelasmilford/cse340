@@ -7,6 +7,15 @@
     <div class="flash-message"><%= messages %></div>
   <% } %>
 
+  <!-- Server-Side Validation Errors -->
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
   <!-- Registration Form -->
   <form action="/account/register" method="post">
     <div class="form-group">

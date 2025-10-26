@@ -334,6 +334,13 @@ button:hover {
   text-decoration: underline;
 }
 
+.notice {
+  color: red;
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
 
 
 /*FOOTER*/
