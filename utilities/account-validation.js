@@ -18,13 +18,18 @@ validate.registationRules = () => {
       .isLength({ min: 2 })
       .withMessage("Please provide a last name."),
 
+    // valid email is required and cannot already exist in the database
     body("account_email")
       .trim()
-      .escape()
-      .notEmpty()
       .isEmail()
-      .normalizeEmail()
-      .withMessage("A valid email is required."),
+      .normalizeEmail() // refer to validator.js docs
+      .withMessage("A valid email is required.")
+      .custom(async (account_email) => {
+        const emailExists = await accountModel.checkExistingEmail(account_email);
+        if (emailExists) {
+          throw new Error("Email exists. Please log in or use a different email");
+        }
+      }),
 
     body("account_password")
       .trim()
@@ -59,4 +64,40 @@ validate.checkRegData = async (req, res, next) => {
   next();
 };
 
-module.exports = validate;
+// Check login data and return errors
+validate.checkLoginData = async (req, res, next) => {
+  const { account_email } = req.body
+  let errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+      title: "Login",
+      nav,
+      errors,
+      account_email, // make the email sticky
+    })
+    return
+  }
+  next()
+}
+
+// Login data validation rules
+validate.loginRules = () => {
+  return [
+    // Email must be valid
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Please enter a valid email"),
+
+    // Password must exist
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .withMessage("Password cannot be empty"),
+  ]
+}
+
+module.exports = validate;// Login data validation rules
