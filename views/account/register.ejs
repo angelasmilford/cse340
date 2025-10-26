@@ -1,4 +1,4 @@
-<maidivn class="register-container">
+<div class="register-container">
   <!-- Page Title -->
   <h1><%= title %></h1>
 
@@ -11,26 +11,32 @@
   <form action="/account/register" method="post">
     <div class="form-group">
       <label for="account_firstname">First Name:</label>
-      <input type="text" id="account_firstname" name="account_firstname" required>
+      <input type="text" id="account_firstname" name="account_firstname" required placeholder="Enter your first name">
     </div>
 
     <div class="form-group">
       <label for="account_lastname">Last Name:</label>
-      <input type="text" id="account_lastname" name="account_lastname" required>
+      <input type="text" id="account_lastname" name="account_lastname" required placeholder="Enter your last name">
     </div>
 
     <div class="form-group">
       <label for="account_email">Email Address:</label>
-      <input type="email" id="account_email" name="account_email" required>
+      <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address">
     </div>
 
     <div class="form-group">
       <label for="account_password">Password:</label>
-      <input type="password" id="account_password" name="account_password" required>
-      <small>Password must be at least 12 characters, include 1 capital letter, 1 number, and 1 special character.</small>
+      <span class="password-hint">
+        Passwords must be at least 12 characters, include 1 capital letter, 1 number, and 1 special character.
+      </span>
+      <input type="password" id="account_password" name="account_password" required
+             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+             placeholder="Enter your password">
       <button type="button" onclick="togglePassword()">Show/Hide</button>
     </div>
 
     <button type="submit">Register</button>
   </form>
+
+  <p class="register-link">Already have an account? <a href="/account/login">Login here</a></p>
 </div>
