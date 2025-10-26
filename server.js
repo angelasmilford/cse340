@@ -57,7 +57,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 
 // Account routes
-app.use("/account", accountRoute)
+app.use("/account", require("./routes/accountRoute"))
 
 /* ***********************
  * Local Server Information
