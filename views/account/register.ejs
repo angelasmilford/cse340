@@ -3,8 +3,14 @@
   <h1><%= title %></h1>
 
   <!-- Flash Messages -->
-  <% if (messages && messages.length > 0) { %>
-    <div class="flash-message"><%= messages %></div>
+  <% if (messages && Object.keys(messages).length > 0) { %>
+    <div class="flash-message">
+      <% Object.keys(messages).forEach(type => { %>
+        <% messages[type].forEach(msg => { %>
+          <p class="<%= type %>"><%= msg %></p>
+        <% }) %>
+      <% }) %>
+    </div>
   <% } %>
 
   <!-- Server-Side Validation Errors -->

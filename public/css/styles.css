@@ -172,10 +172,6 @@ h3 {
   border: 1px solid black;
 }
 
-h4 {
-
-}
-
 .upgrade-item h4 a {
   text-decoration: underline;
   color: navy;
@@ -184,7 +180,6 @@ h4 {
 
 
 /*VEHICLE DETAIL PAGE*/
-/* VEHICLE DETAIL VIEW */
 .vehicle-detail-container {
   display: flex;
   flex-wrap: wrap;
@@ -313,6 +308,7 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 15px;
 }
 
 button:hover {
