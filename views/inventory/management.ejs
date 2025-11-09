@@ -1,0 +1,22 @@
+<main class="management-container">
+  <h1>Inventory Management</h1>
+
+  <!-- Flash Messages -->
+  <% if (messages && messages.length) { %>
+    <div class="flash-message">
+      <ul>
+        <% messages.forEach(msg => { %>
+          <li><%= msg %></li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+
+  <!-- Links to other inventory processes -->
+  <nav>
+    <ul>
+      <li><a href="/inv/add-classification">Add New Classification</a></li>
+      <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
+    </ul>
+  </nav>
+</main>
