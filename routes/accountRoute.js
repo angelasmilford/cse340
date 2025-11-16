@@ -1,4 +1,3 @@
-// Needed Resources
 const express = require("express")
 const router = new express.Router()
 const utilities = require("../utilities/")
@@ -11,18 +10,15 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 // Route to build registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
-// Process the registration form
-router.post('/register', utilities.handleErrors(accountController.registerAccount))
-
-// Process the registration data
+// Process registration (validation -> controller)
 router.post(
   "/register",
-  regValidate.registationRules(),  
-  regValidate.checkRegData,        
-  utilities.handleErrors(accountController.registerAccount) 
-);
+  regValidate.registrationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.registerAccount)
+)
 
-// Process the login request
+// Process the login request (validation -> controller)
 router.post(
   "/login",
   regValidate.loginRules(),
@@ -30,7 +26,7 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 )
 
-// Adding the new default route for accounts
-router.get("/", utilities.handleErrors(accountController.buildAccountManagement))
+// Default account management route
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement)) //Fix
 
 module.exports = router

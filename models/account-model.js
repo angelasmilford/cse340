@@ -1,33 +1,52 @@
-const accountModel = require("../models/account-model");
+const pool = require("../database/");
 
-/* **********************
- *   Check for existing email
- * ********************* */
+/**********************
+ * Check for existing email
+ **********************/
 async function checkExistingEmail(account_email) {
   try {
-    const sql = "SELECT * FROM account WHERE account_email = $1";
-    const email = await pool.query(sql, [account_email]);
-    return email.rowCount; // returns 0 if email doesn't exist, >0 if it does
+    const sql = "SELECT account_email FROM account WHERE account_email = $1";
+    const result = await pool.query(sql, [account_email]);
+    return result.rowCount; // 0 if not exists, >0 if exists
   } catch (error) {
-    return error.message;
+    console.error("checkExistingEmail error:", error);
+    throw error;
   }
 }
 
-/* *****************************
-* Return account data using email address
-* ***************************** */
-async function getAccountByEmail (account_email) {
+/******************************
+ * Register new account
+ ******************************/
+async function accountRegister(firstname, lastname, email, hashedPassword) {
   try {
-    const result = await pool.query(
-      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
-      [account_email])
-    return result.rows[0]
+    const sql = `INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
+                 VALUES ($1, $2, $3, $4) RETURNING account_id`;
+    const result = await pool.query(sql, [firstname, lastname, email, hashedPassword]);
+    return result.rowCount > 0;
   } catch (error) {
-    return new Error("No matching email found")
+    console.error("accountRegister error:", error);
+    throw error;
+  }
+}
+
+/******************************
+ * Get account by email
+ ******************************/
+async function getAccountByEmail(account_email) {
+  try {
+    const sql = `SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password
+                 FROM account WHERE account_email = $1`;
+
+    const result = await pool.query(sql, [account_email]);
+    return result.rows[0];
+  } catch (error) {
+    console.error("getAccountByEmail error:", error);
+    throw error;
   }
 }
 
 module.exports = {
-  ...module.exports,  // keep existing exports
-  checkExistingEmail
+  checkExistingEmail,
+  accountRegister,
+  getAccountByEmail,
 };

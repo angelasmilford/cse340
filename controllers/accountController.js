@@ -69,7 +69,7 @@ async function registerAccount(req, res) {
 
     if (regResult) {
       req.flash("notice", `Congratulations, you're registered ${account_firstname}. Please log in.`)
-      res.status(201).render("account/login", {
+      return res.status(201).render("account/login", {
         title: "Login",
         nav,
         errors: null,
@@ -78,7 +78,7 @@ async function registerAccount(req, res) {
       })
     } else {
       req.flash("notice", "Sorry, the registration failed.")
-      res.status(501).render("account/register", {
+      return res.status(501).render("account/register", {
         title: "Registration",
         nav,
         errors: null,
@@ -91,7 +91,7 @@ async function registerAccount(req, res) {
   } catch (error) {
     console.error(error)
     req.flash("notice", "An unexpected error occurred. Please try again.")
-    res.status(500).render("account/register", {
+    return res.status(500).render("account/register", {
       title: "Registration",
       nav,
       errors: null,
@@ -104,7 +104,9 @@ async function registerAccount(req, res) {
 }
 
 /* ****************************************
- *  Process login request
+ *  Process login request (JWT version)
+ *  This function is used by your routes currently:
+ *  router.post('/login', ..., accountController.accountLogin)
  * ************************************ */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav()
@@ -133,7 +135,7 @@ async function accountLogin(req, res) {
     }
     else {
       req.flash("notice", "Please check your credentials and try again.")
-      res.status(400).render("account/login", {
+      return res.status(400).render("account/login", {
         title: "Login",
         nav,
         errors: null,
@@ -141,12 +143,14 @@ async function accountLogin(req, res) {
       })
     }
   } catch (error) {
+    console.error("[CTRL] AccountLogin error:", error)
     throw new Error('Access Forbidden')
   }
 }
 
 /* ****************************************
-*  Process Login
+*  Process Login (validation-first, session version)
+*  This is kept in case you want to use session-based login.
 * *************************************** */
 async function loginAccount(req, res) {
   let nav = await utilities.getNav()
@@ -194,14 +198,15 @@ async function loginAccount(req, res) {
       account_id: accountData.account_id,
       account_firstname: accountData.account_firstname,
       account_email: accountData.account_email,
+      account_type: accountData.account_type || "Client",
     }
 
     req.flash("notice", `Welcome back, ${accountData.account_firstname}!`)
-    res.redirect("/account") // or user dashboard
+    return res.redirect("/account")
   } catch (error) {
     console.error(error)
     req.flash("notice", "An unexpected error occurred. Please try again.")
-    res.status(500).render("account/login", {
+    return res.status(500).render("account/login", {
       title: "Login",
       nav,
       errors: null,
@@ -214,22 +219,35 @@ async function loginAccount(req, res) {
 /* ****************************************
 *  Deliver Account Management View
 * *************************************** */
-async function buildAccountManagement(req, res) {
-  let nav = await utilities.getNav()
-
-  res.render("account/accountManagement", {
-    title: "Account Management",
-    nav,
-    messages: req.flash("notice"),
-    errors: null
-  })
+/* ****************************************
+ *  Account Management View
+ *  GET /account/
+ *  Shows the "You're logged in." page
+ * **************************************** */
+async function buildAccountManagement(req, res, next) {
+  try {
+    let nav = await utilities.getNav()
+    const accountData = res.locals.accountData
+    // Render the management page view
+    res.render("account/management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      accountData,
+    })
+  } catch (error) {
+    // Debugging
+    console.error("[CTRL] Error building account management view", error)
+    next(error)
+  }
 }
-
 
 // Export functions
 module.exports = {
   buildLogin,
   buildRegister,
   registerAccount,
+  accountLogin,
   loginAccount,
+  buildAccountManagement,
 }
