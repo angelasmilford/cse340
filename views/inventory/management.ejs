@@ -1,5 +1,6 @@
 <main class="management-container">
-  <h1>Inventory Management</h1>
+  <!-- Page Title -->
+  <h1><%= title %></h1>
 
   <!-- Flash Messages -->
   <% if (messages && messages.length) { %>
@@ -19,4 +20,27 @@
       <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
     </ul>
   </nav>
+
+  <!-- Inventory Management Section -->
+  <section>
+    <h2>Manage Inventory</h2>
+    <p>Select a classification from the list to see its inventory items.</p>
+
+    <!-- Classification select list -->
+    <form id="classificationForm">
+      <select name="classification_id" id="classificationList" required>
+        <option value="">Choose a Classification</option>
+        <%- classificationSelect %>
+      </select>
+    </form>
+
+    <!-- Inventory display table -->
+    <table id="inventoryDisplay"></table>
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+  </section>
+
+  <!-- Link to inventory.js -->
+  <script src="/js/inventory.js"></script>
 </main>
+
+

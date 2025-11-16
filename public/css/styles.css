@@ -463,6 +463,119 @@ button:hover {
 }
 
 
+/**************************************
+ INVENTORY MANAGEMENT PAGE
+**************************************/
+.management-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 2px solid cyan;
+  border-radius: 10px;
+}
+
+.management-container h1,
+.management-container h2 {
+  font-family: "Days One", sans-serif;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.management-container p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+#classificationForm {
+  margin-bottom: 2rem;
+}
+
+#classificationList {
+  width: 250px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+#classificationList:focus {
+  border-color: cyan;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  outline: none;
+}
+
+/* Inventory Table */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  border: 1px solid #ccc;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+#inventoryDisplay th {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
+
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: cyan;
+  color: black;
+}
+
+#inventoryDisplay a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+  color: navy;
+}
+
+/* Flash Message */
+.flash-message {
+  background-color: #e8f5e9;
+  border-left: 5px solid #4caf50;
+  color: #1b5e20;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+/* Notice for empty table */
+.notice {
+  color: red;
+  font-weight: bold;
+  padding: 1rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #classificationList {
+    width: 100%;
+  }
+
+  #inventoryDisplay th, 
+  #inventoryDisplay td {
+    padding: 8px 10px;
+  }
+}
+
+
 
 /*FOOTER*/
 footer {
