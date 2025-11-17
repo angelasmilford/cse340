@@ -55,4 +55,22 @@ router.post(
 // Fetch inventory items by classification as JSON
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
+// Route to display edit inventory view
+router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView));
+
+// Process update-inventory form
+router.post(
+  "/update",
+  [
+    body("inv_make").trim().notEmpty().withMessage("Make is required."),
+    body("inv_model").trim().notEmpty().withMessage("Model is required."),
+    body("inv_year").isInt({ min: 1900, max: new Date().getFullYear() + 1 }).withMessage("Valid year required."),
+    body("inv_price").isFloat({ min: 0 }).withMessage("Valid price required."),
+    body("inv_miles").isInt({ min: 0 }).withMessage("Valid mileage required."),
+    body("inv_color").trim().notEmpty().withMessage("Color is required."),
+    body("classification_id").notEmpty().withMessage("Classification is required.")
+  ],
+  utilities.handleErrors(invController.updateInventory)
+);
+
 module.exports = router;

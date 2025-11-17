@@ -1,8 +1,9 @@
-<main>
+<main class="account-management-container">
   <title><%= title %></title>
-  <h1><%= title %></h1>
-  
-  <p>Welcome, <%= accountData.account_firstname %>!</p>
 
-  <p>You're logged in</p>
+  <div class="account-header">
+    <h1><%= title %></h1>
+    <p class="welcome-text">Welcome, <strong><%= accountData.account_firstname %></strong>!</p>
+    <p class="status-text">You're logged in.</p>
+  </div>
 </main>
