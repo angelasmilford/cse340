@@ -18,7 +18,7 @@
       </div>
     <% } %>
 
-    <form action="/inv/update" method="post">
+    <form action="/inv/update" method="post" id="updateForm">
       
       <label for="classificationList">Classification</label>
       <%- classificationSelect %>
@@ -51,10 +51,13 @@
       <label for="inv_color">Color</label>
       <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
 
-      <!-- Hidden ID for updating -->
-      <input type="hidden" name="inv_id" value="<%= inv_id %>">
-
       <button type="submit">Update Vehicle</button>
+
+      <input type="hidden" name="inv_id"
+      <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+      <% } %>>
+
+      <script src="/js/inventory-edit.js"></script>
     </form>
   </div>
 </main>
