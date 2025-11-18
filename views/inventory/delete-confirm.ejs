@@ -1,0 +1,31 @@
+<main>
+  <div class="delete-vehicle-container">
+    <h1><%= title %></h1>
+
+    <% if (messages && messages.length) { %>
+      <div class="flash-message">
+        <% messages.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <p class="delete-instruction">
+      Are you sure you want to delete the <%= inv_make %> <%= inv_model %>?<br>
+      <strong>This action cannot be undone.</strong>
+    </p>
+
+    <form action="/inv/delete/<%= inv_id %>" method="post" id="deleteForm">
+      <input type="hidden" name="inv_id" value="<%= inv_id %>">
+      <input type="hidden" name="inv_make" value="<%= inv_make %>">
+      <input type="hidden" name="inv_model" value="<%= inv_model %>">
+      <input type="hidden" name="inv_year" value="<%= inv_year %>">
+      <input type="hidden" name="inv_price" value="<%= inv_price %>">
+      <input type="hidden" name="classification_id" value="<%= classification_id %>">
+
+      <button type="submit" class="delete-button">Delete Vehicle</button>
+    </form>
+
+    <a href="/inv/" class="cancel-link">Cancel</a>
+  </div>
+</main>
