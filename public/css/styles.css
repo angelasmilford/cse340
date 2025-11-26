@@ -253,7 +253,7 @@ h3 {
 /* Flash Message */
 .flash-message {
   background-color: #fdecea;
-  color: #b71c1c;
+  color: maroon;
   padding: 0.75rem;
   margin-bottom: 1rem;
   border-radius: 5px;
@@ -771,6 +771,92 @@ button:hover {
     font-size: 1.5rem;
   }
 }
+
+
+/**************************************
+ DELETE-CONFIRM INVENTORY VIEW
+ (Matches Add Inventory Styling)
+**************************************/
+.delete-vehicle-container {
+  max-width: 650px;
+  margin: 3rem auto;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.08);
+  border-top: 6px solid #c62828;
+}
+
+.delete-vehicle-container h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #b71c1c;
+  font-weight: 700;
+}
+
+.delete-vehicle-container p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.flash-message {
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  color: #b71c1c;
+}
+
+/* Vehicle details box */
+.vehicle-details {
+  background: #f9f9f9;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1.2rem 0;
+  border-left: 4px solid #c62828;
+  font-size: 0.95rem;
+}
+
+/* Button Row */
+.btn-row {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Cancel Button */
+.btn-cancel {
+  padding: 10px 16px;
+  background: #bdbdbd;
+  color: #000;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.2s ease-in-out;
+  font-weight: 600;
+}
+
+.btn-cancel:hover {
+  background: #9e9e9e;
+}
+
+/* Delete Button */
+.btn-delete {
+  padding: 10px 16px;
+  background: #c62828;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-delete:hover {
+  background: #b71c1c;
+}
+
 
 
 

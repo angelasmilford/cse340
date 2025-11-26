@@ -73,7 +73,10 @@ invCont.buildManagementView = async (req, res, next) => {
       title: "Inventory Management",
       nav,
       classificationSelect,
-      messages: [].concat(req.flash("success") || []),
+      messages: [
+        ...req.flash("success"),
+        ...req.flash("notice")
+      ],
       errors: []
     });
   } catch (error) {
