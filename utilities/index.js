@@ -135,4 +135,24 @@ Util.checkLogin = (req, res, next) => {
   }
 };
 
+/* ****************************************
+* Check account role (Employee or Admin only)
+**************************************** */
+Util.checkEmployeeOrAdmin = (req, res, next) => {
+  const account = res.locals.accountData;
+
+  if (!account) {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+
+  // Allow only Employee or Admin roles
+  if (account.account_type === "Employee" || account.account_type === "Admin") {
+    return next();
+  }
+
+  req.flash("notice", "You do not have permission to access this page.");
+  return res.redirect("/account/login");
+};
+
 module.exports = Util;

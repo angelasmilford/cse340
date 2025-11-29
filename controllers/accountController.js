@@ -242,6 +242,93 @@ async function buildAccountManagement(req, res, next) {
   }
 }
 
+async function buildUpdateAccountView(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_id } = req.params
+  const accountData = await accountModel.getAccountById(account_id)
+
+  res.render("account/update", {
+    title: "Update Account Information",
+    nav,
+    errors: null,
+    messages: req.flash("notice"),
+    accountData,
+  })
+}
+
+async function buildUpdateAccount(req, res) {
+  const account_id = req.params.account_id;
+  const accountData = await accountModel.getAccountById(account_id);
+  const nav = await utilities.getNav();
+
+  res.render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+    messages: req.flash("notice"),
+    accountData,
+  });
+}async function updateAccountInfo(req, res) {
+  let nav = await utilities.getNav();
+  const { account_firstname, account_lastname, account_email, account_id } = req.body;
+
+  const updateResult = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  );
+
+  if (updateResult) {
+    req.flash("notice", "Account updated successfully.");
+  } else {
+    req.flash("notice", "Account update failed.");
+  }
+
+  const refreshedData = await accountModel.getAccountById(account_id);
+
+  res.render("account/management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+    messages: req.flash("notice"),
+    accountData: refreshedData,
+  });
+}
+
+async function updateAccountPassword(req, res) {
+  let nav = await utilities.getNav();
+  const { account_password, account_id } = req.body;
+
+  const hashedPw = await bcrypt.hash(account_password, 10);
+
+  const result = await accountModel.updatePassword(account_id, hashedPw);
+
+  if (result) {
+    req.flash("notice", "Password updated successfully.");
+  } else {
+    req.flash("notice", "Password update failed.");
+  }
+
+  const accountData = await accountModel.getAccountById(account_id);
+
+  res.render("account/management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+    messages: req.flash("notice"),
+    accountData,
+  });
+}
+
+async function logoutAccount(req, res) {
+  // Clear the JWT token cookie
+  res.clearCookie("jwt");
+
+  // Redirect to home
+  return res.redirect("/");
+}
+
 // Export functions
 module.exports = {
   buildLogin,
@@ -250,4 +337,9 @@ module.exports = {
   accountLogin,
   loginAccount,
   buildAccountManagement,
+  logoutAccount,
+  buildUpdateAccountView,
+  buildUpdateAccount,
+  updateAccountInfo,
+  updateAccountPassword
 }

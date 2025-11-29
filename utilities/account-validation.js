@@ -111,4 +111,90 @@ validate.checkLoginData = async (req, res, next) => {
   next();
 };
 
+// Server-side validation for account update
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .isAlpha()
+      .withMessage("First name must contain only letters.")
+      .notEmpty()
+      .withMessage("First name is required."),
+
+    body("account_lastname")
+      .trim()
+      .isAlpha()
+      .withMessage("Last name must contain only letters.")
+      .notEmpty()
+      .withMessage("Last name is required."),
+
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("A valid email is required.")
+      .custom(async (email, { req }) => {
+        const existingEmail = await accountModel.getAccountByEmail(email);
+        if (existingEmail && existingEmail.account_id != req.body.account_id) {
+          throw new Error("Email already exists. Choose another.");
+        }
+      }),
+  ];
+};
+
+validate.updatePasswordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .isLength({ min: 12 })
+      .withMessage("Password must be at least 12 characters.")
+      .matches(/[A-Z]/)
+      .withMessage("Password must include an uppercase letter.")
+      .matches(/[a-z]/)
+      .withMessage("Password must include a lowercase letter.")
+      .matches(/\d/)
+      .withMessage("Password must include a number.")
+      .matches(/[!@#$%^&*]/)
+      .withMessage("Password must include a symbol."),
+  ];
+};
+
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const errors = validationResult(req);
+  let nav = await utilities.getNav();
+
+  if (!errors.isEmpty()) {
+    return res.render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      messages: req.flash("notice"),
+      accountData: {
+        account_id: req.body.account_id,
+        account_firstname: req.body.account_firstname,
+        account_lastname: req.body.account_lastname,
+        account_email: req.body.account_email,
+      },
+    });
+  }
+  next();
+};
+
+validate.checkUpdatePasswordData = async (req, res, next) => {
+  const errors = validationResult(req);
+  let nav = await utilities.getNav();
+
+  if (!errors.isEmpty()) {
+    req.flash("notice", "Password update failed. Please fix errors.");
+
+    return res.render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      messages: req.flash("notice"),
+      accountData: await accountModel.getAccountById(req.body.account_id),
+    });
+  }
+  next();
+};
+
 module.exports = validate;

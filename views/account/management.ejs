@@ -2,8 +2,25 @@
   <title><%= title %></title>
 
   <div class="account-header">
-    <h1><%= title %></h1>
-    <p class="welcome-text">Welcome, <strong><%= accountData.account_firstname %></strong>!</p>
+    <!-- Greeting -->
+    <h2>Welcome <%= accountData.account_firstname %></h2>
+
+    <!-- Update Account Information -->
+    <p>
+      <a href="/account/update/<%= accountData.account_id %>">
+        Update Account Information
+      </a>
+    </p>
+
+    <!-- Logged in message -->
     <p class="status-text">You're logged in.</p>
+
+    <!-- Employee/Admin Inventory Tools -->
+    <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+      <h3>Inventory Management</h3>
+      <p>
+        <a href="/inv/">Go to Inventory Management</a>
+      </p>
+    <% } %>
   </div>
 </main>

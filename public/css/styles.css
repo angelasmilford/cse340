@@ -857,6 +857,138 @@ button:hover {
   background: #b71c1c;
 }
 
+/*ACCOUNT UPDATE*/
+.update-account-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  color: #e0e0e0;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: cyan;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.update-wrapper {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Flash Messages */
+.flash-message {
+  background: rgba(0, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid cyan;
+}
+
+/* Errors */
+.form-errors {
+  background: rgba(255, 0, 0, 0.15);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid red;
+}
+
+.card-section {
+  background: #121212;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.08);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: cyan;
+}
+
+/* Form Structure */
+.styled-form {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  color: cyan;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: cyan;
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+}
+
+/* Password Info */
+.password-info {
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+  color: #cfcfcf;
+}
+
+.password-info ul {
+  margin-top: 0.5rem;
+  margin-left: 1.2rem;
+  color: #b8f3f3;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-warning {
+  width: 100%;
+  padding: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s ease;
+}
+
+/* Cyan Button (Update Info) */
+.btn-primary {
+  background: cyan;
+  color: black;
+}
+
+.btn-primary:hover {
+  background: #00e0e0;
+  transform: scale(1.03);
+}
+
+/* Red Button (Change Password) */
+.btn-warning {
+  background: #ff5555;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: #e03b3b;
+  transform: scale(1.03);
+}
 
 
 

@@ -1,0 +1,117 @@
+<main class="update-account-container">
+
+  <!-- Page Title -->
+  <h1 class="page-title"><%= title %></h1>
+
+  <!-- Flash Messages -->
+  <% if (messages && messages.length > 0) { %>
+    <div class="flash-message">
+      <% messages.forEach(msg => { %>
+        <p><%= msg %></p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <!-- Validation Errors -->
+  <% if (errors && errors.length > 0) { %>
+    <div class="form-errors">
+      <ul>
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+
+  <div class="update-wrapper">
+
+    <!-- ========================= -->
+    <!--      ACCOUNT UPDATE       -->
+    <!-- ========================= -->
+    <section class="card-section">
+      <h2 class="section-title">Update Account Information</h2>
+
+      <form action="/account/update" method="post" class="styled-form">
+
+        <div class="form-group">
+          <label for="account_firstname">First Name</label>
+          <input
+            type="text"
+            id="account_firstname"
+            name="account_firstname"
+            value="<%= accountData.account_firstname %>"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="account_lastname">Last Name</label>
+          <input
+            type="text"
+            id="account_lastname"
+            name="account_lastname"
+            value="<%= accountData.account_lastname %>"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="account_email">Email</label>
+          <input
+            type="email"
+            id="account_email"
+            name="account_email"
+            value="<%= accountData.account_email %>"
+            required
+          >
+        </div>
+
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+        <button class="btn-primary" type="submit">
+          Update Account Info
+        </button>
+      </form>
+    </section>
+
+    <!-- ========================= -->
+    <!--      CHANGE PASSWORD      -->
+    <!-- ========================= -->
+    <section class="card-section">
+      <h2 class="section-title">Change Password</h2>
+
+      <p class="password-info">
+        Enter a new password to replace your current one.<br>
+        Requirements:
+        <ul>
+          <li>Minimum 12 characters</li>
+          <li>Must include lowercase, uppercase, number, and symbol</li>
+        </ul>
+      </p>
+
+      <form action="/account/update-password" method="post" class="styled-form">
+
+        <div class="form-group">
+          <label for="account_password">New Password</label>
+          <input
+            type="password"
+            id="account_password"
+            name="account_password"
+            required
+            minlength="12"
+            pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{12,}"
+            title="Must be at least 12 characters and include uppercase, lowercase, number, and special character."
+          >
+        </div>
+
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+        <button class="btn-warning" type="submit">
+          Change Password
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+</main>

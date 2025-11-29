@@ -5,17 +5,23 @@ const utilities = require("../utilities/");
 const { body } = require("express-validator");
 
 // Inventory Management View
-router.get("/", utilities.handleErrors(invController.buildManagementView));
+router.get(
+  "/",
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.buildManagementView)
+);
 
 // Render add-classification form
 router.get(
   "/add-classification",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddClassification)
 );
 
 // Process add-classification form
 router.post(
   "/add-classification",
+  utilities.checkEmployeeOrAdmin,
   [
     body("classification_name")
       .trim()
@@ -34,12 +40,14 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvento
 // Render add-inventory form
 router.get(
   "/add-inventory",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddInventory)
 );
 
 // Process add-inventory form
 router.post(
   "/add-inventory",
+  utilities.checkEmployeeOrAdmin,
   [
     body("inv_make").trim().notEmpty().withMessage("Make is required."),
     body("inv_model").trim().notEmpty().withMessage("Model is required."),
@@ -56,11 +64,16 @@ router.post(
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
 // Route to display edit inventory view
-router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView));
+router.get(
+  "/edit/:inv_id",
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.editInventoryView)
+);
 
 // Process update-inventory form
 router.post(
   "/update",
+  utilities.checkEmployeeOrAdmin,
   [
     body("inv_make").trim().notEmpty().withMessage("Make is required."),
     body("inv_model").trim().notEmpty().withMessage("Model is required."),
@@ -76,13 +89,15 @@ router.post(
 // Delete view
 router.get(
   "/delete/:inv_id",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.deleteInventoryView)
-)
+);
 
 // Delete action
 router.post(
   "/delete/:inv_id",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.deleteInventory)
-)
+);
 
 module.exports = router;
