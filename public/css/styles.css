@@ -87,7 +87,7 @@ h1 {
 }
 
 .hero-text {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(176, 176, 176, 0.85);
   color: cyan;
   padding: 25px 30px;
   max-width: 90%;
@@ -464,85 +464,87 @@ button:hover {
 
 
 /**************************************
- ACCOUNT MANAGEMENT VIEW
+  ACCOUNT MANAGEMENT PAGE STYLING
 **************************************/
+
 .account-management-container {
   max-width: 700px;
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: #f4f4f9;
-  border-radius: 12px;
-  border: 2px solid cyan;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 50px auto;
+  padding: 25px;
 }
 
-.account-management-container h1 {
+.account-header {
+  background: #ffffff;
+  padding: 30px 35px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.welcome-text {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #333;
+/* Greeting */
+.account-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
 }
 
-.status-text {
-  text-align: center;
-  font-size: 1rem;
-  color: #666;
-}
-
-.account-actions {
-  margin-top: 2rem;
-}
-
-.account-actions h2 {
-  font-family: "Days One", sans-serif;
-  font-size: 1.6rem;
-  color: black;
-  margin-bottom: 1rem;
-}
-
-.account-actions ul {
-  list-style: none;
-  padding: 0;
-}
-
-.account-actions li {
-  margin: 10px 0;
-}
-
-.account-actions a {
-  font-size: 1.1rem;
-  text-decoration: none;
-  color: black;
-  padding: 10px 15px;
-  display: inline-block;
-  background-color: cyan;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-}
-
-.account-actions a:hover {
-  background-color: black;
+/* Update Account Link */
+.account-header a {
+  background: #0288d1;
   color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+.account-header a:hover {
+  background: #0277bd;
   transform: scale(1.03);
 }
 
+/* Status Text */
+.status-text {
+  font-size: 1rem;
+  background: #e0f7fa;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: #006064;
+  font-weight: 500;
+  border-left: 4px solid #00acc1;
+}
+
+/* Inventory Tools Title */
+.account-header h3 {
+  font-size: 1.4rem;
+  margin-top: 20px;
+}
+
+/* Inventory Link */
+.account-header p a[href="/inv/"] {
+  background: #00796b;
+}
+
+.account-header p a[href="/inv/"]:hover {
+  background: #00695c;
+}
+
 /* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .account-management-container {
-    padding: 1.5rem;
+    padding: 12px;
   }
 
-  .account-actions a {
-    width: 100%;
-    text-align: center;
+  .account-header {
+    padding: 20px;
+  }
+
+  .account-header h2 {
+    font-size: 1.5rem;
   }
 }
 
@@ -850,145 +852,177 @@ button:hover {
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.2s ease-in-out;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn-delete:hover {
-  background: #b71c1c;
+  background-color: #b71c1c;
+  transform: scale(1.03);
 }
 
 /*ACCOUNT UPDATE*/
 .update-account-container {
-  width: 90%;
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
-  color: #e0e0e0;
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.page-title {
-  text-align: center;
-  margin-bottom: 2rem;
+/* Page Title */
+.update-account-container .page-title,
+.update-account-container h1 {
   font-size: 2rem;
-  color: cyan;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-.update-wrapper {
-  display: grid;
-  gap: 2rem;
+/* Notice + Error Boxes */
+.notice-box, .notice {
+  background: #e0f7fa;
+  border-left: 4px solid #00acc1;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  color: #006064;
 }
 
-/* Flash Messages */
-.flash-message {
-  background: rgba(0, 255, 255, 0.15);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  border-left: 4px solid cyan;
+.error-box, .errors {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  color: #b71c1c;
 }
 
-/* Errors */
-.form-errors {
-  background: rgba(255, 0, 0, 0.15);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  border-left: 4px solid red;
+.error-box ul,
+.errors ul {
+  padding-left: 20px;
 }
 
-.card-section {
-  background: #121212;
-  padding: 2rem;
+/* Section Cards */
+.card-section,
+.update-account-container section {
+  background: #ffffff;
+  padding: 25px 30px;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
-  border: 1px solid rgba(0, 255, 255, 0.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-.section-title {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: cyan;
+.section-title,
+.update-account-container h2 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
 }
 
-/* Form Structure */
-.styled-form {
+/* Form Layout */
+.account-form,
+.password-form,
+.form-grid {
   display: grid;
-  gap: 1.2rem;
+  gap: 18px;
 }
 
-.form-group {
+.form-field {
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
-  margin-bottom: 0.4rem;
-  font-weight: bold;
-  color: cyan;
+.form-field.full-width {
+  grid-column: 1 / -1;
 }
 
-.form-group input {
-  padding: 10px;
-  border: 1px solid #2a2a2a;
-  border-radius: 6px;
-  background: #1a1a1a;
-  color: #f0f0f0;
+/* Labels */
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
-.form-group input:focus {
-  border-color: cyan;
-  box-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+input:focus {
+  border-color: #0288d1;
 }
 
-/* Password Info */
+/* Password Requirements */
+.password-requirements,
 .password-info {
-  margin-bottom: 1.2rem;
-  line-height: 1.5;
-  color: #cfcfcf;
+  font-size: 0.95rem;
+  line-height: 1.5rem;
+  background: #f7f7f7;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  color: #444;
 }
 
-.password-info ul {
-  margin-top: 0.5rem;
-  margin-left: 1.2rem;
-  color: #b8f3f3;
+/* Button Row */
+.button-row {
+  margin-top: 10px;
 }
 
 /* Buttons */
-.btn-primary,
-.btn-warning {
-  width: 100%;
-  padding: 12px;
-  font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
+button,
+.btn,
+.primary-btn,
+.danger-btn {
+  padding: 12px 18px;
   border: none;
-  transition: 0.3s ease;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
 }
 
-/* Cyan Button (Update Info) */
-.btn-primary {
-  background: cyan;
-  color: black;
-}
-
-.btn-primary:hover {
-  background: #00e0e0;
-  transform: scale(1.03);
-}
-
-/* Red Button (Change Password) */
-.btn-warning {
-  background: #ff5555;
+/* Primary (Save Changes) */
+.primary-btn,
+button[type="submit"] {
+  background: #0288d1;
   color: white;
 }
 
-.btn-warning:hover {
-  background: #e03b3b;
+.primary-btn:hover,
+button[type="submit"]:hover {
+  background: #0277bd;
   transform: scale(1.03);
 }
+
+/* Danger (Update Password) */
+.danger-btn {
+  background: #c62828;
+  color: white;
+}
+
+.danger-btn:hover {
+  background: #b71c1c;
+  transform: scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .update-account-container {
+    padding: 10px;
+  }
+
+  .card-section {
+    padding: 20px;
+  }
+}
+
 
 
 
