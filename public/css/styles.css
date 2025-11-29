@@ -87,7 +87,7 @@ h1 {
 }
 
 .hero-text {
-  background: rgba(176, 176, 176, 0.85);
+  background: rgba(181, 181, 181, 0.85);
   color: cyan;
   padding: 25px 30px;
   max-width: 90%;
@@ -304,7 +304,7 @@ button {
   padding: 0.75rem;
   border: none;
   border-radius: 5px;
-  background-color: #005a99; /* High contrast on white */
+  background-color: #0095ff; /* High contrast on white */
   color: #ffffff;
   font-size: 1rem;
   cursor: pointer;
