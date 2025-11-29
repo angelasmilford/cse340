@@ -232,7 +232,6 @@ h3 {
 }
 
 
-
 /* Login View */
 .login-container {
   max-width: 400px;
@@ -247,13 +246,13 @@ h3 {
 .login-container h1 {
   margin-bottom: 1.5rem;
   font-size: 2rem;
-  color: #333;
+  color: #222; /* Darker for better contrast */
 }
 
 /* Flash Message */
 .flash-message {
-  background-color: #fdecea;
-  color: maroon;
+  background-color: #f7d7d7; /* slightly stronger contrast */
+  color: #7a0000; /* darker maroon */
   padding: 0.75rem;
   margin-bottom: 1rem;
   border-radius: 5px;
@@ -273,29 +272,31 @@ h3 {
 .form-group label {
   display: block;
   margin-bottom: 0.25rem;
-  font-weight: 500;
+  font-weight: 600; /* slightly bolder for readability */
+  color: #222;
 }
 
 .form-group input {
   width: 100%;
   padding: 0.5rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #777; /* darker border for contrast */
   box-sizing: border-box;
+  color: #111;
 }
 
 /* Valid/Invalid Input Styling */
 input:required:invalid,
 input:focus:invalid {
-  border: 2px solid red;
+  border: 2px solid #cc0000; /* stronger contrast */
   background-color: #ffe6e6;
-  color: #a70000;
+  color: #700000;
 }
 
 input:required:valid {
-  border: 2px solid green;
+  border: 2px solid #007700; 
   background-color: #e6ffe6;
-  color: #006600;
+  color: #004400;
 }
 
 /* Button Styling */
@@ -303,8 +304,8 @@ button {
   padding: 0.75rem;
   border: none;
   border-radius: 5px;
-  background-color: hsl(193, 100%, 68%);
-  color: white;
+  background-color: #005a99; /* High contrast on white */
+  color: #ffffff;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -312,7 +313,7 @@ button {
 }
 
 button:hover {
-  background-color:  hsl(193, 100%, 68%);
+  background-color: #004170; /* darker hover for contrast */
 }
 
 /* Registration Link */
@@ -322,20 +323,21 @@ button:hover {
 }
 
 .register-link a {
-  color: #007bff;
-  text-decoration: none;
+  color: #0047cc;  /* high-contrast blue */
+  text-decoration: underline; /* required for accessibility */
 }
 
 .register-link a:hover {
-  text-decoration: underline;
+  color: #003399; /* darker on hover */
 }
 
 .notice {
-  color: red;
+  color: #b00000;
   list-style-type: none;
   padding: 0;
   margin-bottom: 1rem;
 }
+
 
 /**************************************
  ADD CLASSIFICATION & ADD INVENTORY VIEWS
