@@ -3,12 +3,12 @@
 
   <!-- Flash Messages -->
   <% if (messages && messages.length > 0) { %>
-    <div class="flash-message"><%= messages %></div>
+    <div class="flash-message" role="status" aria-live="polite"><%= messages %></div>
   <% } %>
 
   <!-- Server-Side Validation Errors -->
   <% if (errors) { %>
-    <ul class="notice">
+    <ul class="notice" role="alert" aria-live="assertive">
       <% errors.array().forEach(error => { %>
         <li><%= error.msg %></li>
       <% }) %>
@@ -16,14 +16,16 @@
   <% } %>
 
   <!-- Login Form -->
-  <form id="loginForm" action="/account/login" method="post">
+  <form id="loginForm" action="/account/login" method="post" novalidate>
     <div class="form-group">
-      <label for="account_email">Email:</label>
+      <!-- label 'for' now matches input id -->
+      <label for="accountEmail">Email:</label>
       <input type="email" name="account_email" id="accountEmail" required value="<%= locals.account_email %>">
     </div>
 
     <div class="form-group">
-      <label for="account_password">Password:</label>
+      <!-- label 'for' now matches input id -->
+      <label for="accountPassword">Password:</label>
       <input type="password" name="account_password" id="accountPassword" required>
     </div>
 
