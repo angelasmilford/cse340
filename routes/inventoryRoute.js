@@ -3,6 +3,7 @@ const router = express.Router();
 const invController = require("../controllers/invController");
 const utilities = require("../utilities/");
 const { body } = require("express-validator");
+const invValidate = require("../utilities/inventory-validation");
 
 // Inventory Management View
 router.get(
@@ -48,15 +49,8 @@ router.get(
 router.post(
   "/add-inventory",
   utilities.checkEmployeeOrAdmin,
-  [
-    body("inv_make").trim().notEmpty().withMessage("Make is required."),
-    body("inv_model").trim().notEmpty().withMessage("Model is required."),
-    body("inv_year").isInt({ min: 1900, max: new Date().getFullYear() + 1 }).withMessage("Valid year required."),
-    body("inv_price").isFloat({ min: 0 }).withMessage("Valid price required."),
-    body("inv_miles").isInt({ min: 0 }).withMessage("Valid mileage required."),
-    body("inv_color").trim().notEmpty().withMessage("Color is required."),
-    body("classification_id").notEmpty().withMessage("Classification is required.")
-  ],
+  invValidate.inventoryRules(),
+  invValidate.checkInventoryData,
   utilities.handleErrors(invController.addInventory)
 );
 
@@ -74,15 +68,8 @@ router.get(
 router.post(
   "/update",
   utilities.checkEmployeeOrAdmin,
-  [
-    body("inv_make").trim().notEmpty().withMessage("Make is required."),
-    body("inv_model").trim().notEmpty().withMessage("Model is required."),
-    body("inv_year").isInt({ min: 1900, max: new Date().getFullYear() + 1 }).withMessage("Valid year required."),
-    body("inv_price").isFloat({ min: 0 }).withMessage("Valid price required."),
-    body("inv_miles").isInt({ min: 0 }).withMessage("Valid mileage required."),
-    body("inv_color").trim().notEmpty().withMessage("Color is required."),
-    body("classification_id").notEmpty().withMessage("Classification is required.")
-  ],
+  invValidate.inventoryRules(),
+  invValidate.checkInventoryData,
   utilities.handleErrors(invController.updateInventory)
 );
 
