@@ -79,7 +79,6 @@ const checkInventoryData = async (req, res, next) => {
   let errors = validationResult(req);
   const nav = await utilities.getNav();
 
-  // Values sent back so the form stays filled
   const {
     inv_id,
     inv_make,
@@ -94,12 +93,19 @@ const checkInventoryData = async (req, res, next) => {
     classification_id
   } = req.body;
 
+  // Determine which view to render (add or edit)
+  const isEdit = Boolean(inv_id);
+  const view = isEdit ? "inventory/edit-inventory" : "inventory/add-inventory";
+  const title = isEdit
+    ? `Edit ${inv_make} ${inv_model}`
+    : "Add New Vehicle";
+
   if (!errors.isEmpty()) {
-    let classificationSelect =
+    const classificationSelect =
       await utilities.buildClassificationList(classification_id);
 
-    return res.render("inventory/edit-inventory", {
-      title: `Edit ${inv_make} ${inv_model}`,
+    return res.render(view, {
+      title,
       nav,
       errors: errors.array(),
       classificationSelect,
@@ -116,6 +122,7 @@ const checkInventoryData = async (req, res, next) => {
       classification_id
     });
   }
+
   next();
 };
 
