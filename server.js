@@ -18,6 +18,8 @@ const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute") 
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const reviewRoute = require("./routes/reviewRoute");
+
 
 /* ***********************
  * Middleware
@@ -69,6 +71,9 @@ app.use("/inv", inventoryRoute)
 // Account routes
 app.use("/account", require("./routes/accountRoute"))
 
+// Review routes
+app.use("/reviews", reviewRoute);
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
@@ -102,3 +107,5 @@ app.use(async (err, req, res, next) => {
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
+

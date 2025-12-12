@@ -23,4 +23,26 @@
       </p>
     <% } %>
   </div>
+
+  <h2>Your Review History</h2>
+
+  <% if (userReviews.length === 0) { %>
+    <p>You haven't written any reviews yet.</p>
+  <% } else { %>
+    <ul class="review-history">
+      <% userReviews.forEach(review => { %>
+        <li class="review-card">
+          <strong><%= review.inv_make %> <%= review.inv_model %></strong>
+          <p><%= review.review_text %></p>
+          <small>Posted on: <%= new Date(review.review_date).toLocaleDateString() %></small>
+
+          <form method="POST" action="/reviews/delete">
+            <input type="hidden" name="review_id" value="<%= review.review_id %>">
+            <button class="delete-review-btn">Delete</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+
 </main>

@@ -49,11 +49,19 @@ invCont.buildByInventoryId = async function (req, res, next) {
     const classificationSelect = await utilities.buildClassificationList(); // navbar dropdown
     const vehicleHTML = await utilities.buildVehicleDetail(vehicleData);
 
+    const reviewModel = require("../models/review-model");
+
+    const reviews = await reviewModel.getReviewsByVehicle(inv_id);
+
+
     res.render("inventory/detail", {
       title: vehicleData.inv_make + " " + vehicleData.inv_model,
       nav,
       classificationSelect,
       vehicleHTML,
+      reviews: reviews || [],
+      inv_id,
+      accountData: res.locals.accountData || null,
     });
   } catch (error) {
     console.error("Error building vehicle detail:", error);

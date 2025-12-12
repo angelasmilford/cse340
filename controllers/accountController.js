@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs")
 const { validationResult } = require("express-validator")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+const reviewModel = require("../models/review-model");
 
 /* ****************************************
 *  Deliver login view
@@ -228,17 +229,23 @@ async function buildAccountManagement(req, res, next) {
   try {
     let nav = await utilities.getNav()
     const accountData = res.locals.accountData
-    // Render the management page view
+    
+    const account_id = res.locals.accountData.account_id;
+
+    // Fetch past reviews by logged-in user
+    const userReviews = await reviewModel.getReviewsByAccount(account_id);
+
     res.render("account/management", {
       title: "Account Management",
       nav,
-      errors: null,
-      accountData,
-    })
+      accountData: res.locals.accountData,
+      userReviews,
+      errors: null
+    });
+
   } catch (error) {
-    // Debugging
-    console.error("[CTRL] Error building account management view", error)
-    next(error)
+    console.error("buildAccountManagement error:", error);
+    next(error);
   }
 }
 
