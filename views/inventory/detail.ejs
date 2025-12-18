@@ -1,33 +1,37 @@
 <div class="vehicle-detail-container">
   <div class="vehicle-detail">
-    <%- vehicleHTML %>
+    <% if (typeof vehicleHTML !== 'undefined') { %>
+      <%- vehicleHTML %>
+    <% } else { %>
+      <p>No vehicle details available.</p>
+    <% } %>
   </div>
 </div>
 
 <section class="reviews-section card-section">
   <h2 class="reviews-title section-title">Reviews</h2>
 
-  <% if (reviews.length === 0) { %>
+  <% if (!reviews || reviews.length === 0) { %>
     <p class="no-reviews">No reviews yet.</p>
+  <% } else { %>
+    <div class="reviews-list">
+      <% reviews.forEach(r => { %>
+        <div class="review-card">
+          <p class="review-author"><strong><%= r.account_firstname %></strong></p>
+          <p class="review-text"><%= r.review_text %></p>
+          <small class="review-date"><%= new Date(r.review_date).toDateString() %></small>
+
+          <% if (locals.accountData && r.account_id === locals.accountData.account_id) { %>
+            <form action="/reviews/delete" method="POST" class="review-delete-form">
+              <input type="hidden" name="review_id" value="<%= r.review_id %>">
+              <input type="hidden" name="inv_id" value="<%= inv_id %>">
+              <button type="submit" class="btn delete-btn">Delete</button>
+            </form>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
   <% } %>
-
-  <div class="reviews-list">
-    <% reviews.forEach(r => { %>
-      <div class="review-card">
-        <p class="review-author"><strong><%= r.account_firstname %></strong></p>
-        <p class="review-text"><%= r.review_text %></p>
-        <small class="review-date"><%= new Date(r.review_date).toDateString() %></small>
-
-        <% if (locals.accountData && r.account_id === locals.accountData.account_id) { %>
-          <form action="/reviews/delete" method="POST" class="review-delete-form">
-            <input type="hidden" name="review_id" value="<%= r.review_id %>">
-            <input type="hidden" name="inv_id" value="<%= inv_id %>">
-            <button type="submit" class="btn delete-btn">Delete</button>
-          </form>
-        <% } %>
-      </div>
-    <% }) %>
-  </div>
 
   <% if (!locals.accountData) { %>
     <p class="login-prompt">You must <a href="/account/login">log in</a> to leave a review.</p>
@@ -36,9 +40,8 @@
 
     <form action="/reviews/add" method="POST" class="review-form">
       <input type="hidden" name="inv_id" value="<%= inv_id %>">
-
       <label for="rating" class="review-label">Rating:</label>
-      <select name="rating" class="review-input" required>
+      <select id="rating" name="rating" class="review-input" required>
         <option value="">Select</option>
         <option>1</option>
         <option>2</option>
@@ -48,7 +51,7 @@
       </select>
 
       <label for="review_text" class="review-label">Review:</label>
-      <textarea name="review_text" class="review-input" required></textarea>
+      <textarea id="review_text" name="review_text" class="review-input" required></textarea>
 
       <button type="submit" class="primary-btn submit-review-btn">Submit Review</button>
     </form>

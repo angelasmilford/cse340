@@ -24,31 +24,33 @@
     <% } %>
   </div>
 
-  <h2>Your Review History</h2>
+  <div class="review">
+      <h2>Your Review History</h2>
 
-  <% if (userReviews.length === 0) { %>
-    <p>You haven't written any reviews yet.</p>
-  <% } else { %>
-    <ul class="review-history">
-      <% userReviews.forEach(review => { %>
-        <li class="review-card">
-          <strong class="review-author">
-            <%= review.inv_make %> <%= review.inv_model %>
-          </strong>
+    <% if (userReviews.length === 0) { %>
+      <p>You haven't written any reviews yet.</p>
+    <% } else { %>
+      <ul class="review-history">
+        <% userReviews.forEach(review => { %>
+          <li class="review-card">
+            <strong class="review-author">
+              <%= review.inv_make %> <%= review.inv_model %>
+            </strong>
 
-          <p class="review-text"><%= review.review_text %></p>
+            <p class="review-text"><%= review.review_text %></p>
 
-          <small class="review-date">
-            Posted on: <%= new Date(review.review_date).toLocaleDateString() %>
-          </small>
+            <small class="review-date">
+              Posted on: <%= new Date(review.review_date).toLocaleDateString() %>
+            </small>
 
-          <form method="POST" action="/reviews/delete" class="review-delete-form">
-            <input type="hidden" name="review_id" value="<%= review.review_id %>">
-            <button class="delete-btn">Delete</button>
-          </form>
-        </li>
-      <% }) %>
-    </ul>
-  <% } %>
+            <form method="POST" action="/reviews/delete" class="review-delete-form">
+              <input type="hidden" name="review_id" value="<%= review.review_id %>">
+              <button class="delete-btn">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
 
 </main>

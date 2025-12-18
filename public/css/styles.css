@@ -587,7 +587,7 @@ button:hover {
 
 /* Update Account Link */
 .account-header a {
-  background: #0288d1;
+  background: #005a8a;
   color: white;
   padding: 12px 18px;
   border-radius: 8px;
@@ -1086,13 +1086,13 @@ button,
 /* Primary (Save Changes) */
 .primary-btn,
 button[type="submit"] {
-  background: #0288d1;
+  background: #005a8a;
   color: white;
 }
 
 .primary-btn:hover,
 button[type="submit"]:hover {
-  background: #0277bd;
+  background: navy;
   transform: scale(1.03);
 }
 
@@ -1227,7 +1227,7 @@ button[type="submit"]:hover {
 .submit-review-btn {
   padding: 0.8rem 1.2rem;
   border-radius: 6px;
-  background-color: #0288d1; /* Matches primary buttons */
+  background-color: #005a8a; /* Matches primary buttons */
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -1235,7 +1235,7 @@ button[type="submit"]:hover {
 }
 
 .submit-review-btn:hover {
-  background-color: #0277bd;
+  background-color: #005a8a;
   transform: scale(1.03);
 }
 
@@ -1252,13 +1252,17 @@ button[type="submit"]:hover {
 
 
 /* Review History on Account Management page */
+.review {
+  padding-top: 15px;
+}
+
 .review-history {
   list-style: none;
-  padding: 0;
+  padding-top: 0;
 }
 
 .review-card {
-  background: #f3f3f3;
+  background: #696969;
   padding: 1rem;
   margin: 0.75rem 0;
   border-radius: 6px;
