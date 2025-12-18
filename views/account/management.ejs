@@ -32,13 +32,19 @@
     <ul class="review-history">
       <% userReviews.forEach(review => { %>
         <li class="review-card">
-          <strong><%= review.inv_make %> <%= review.inv_model %></strong>
-          <p><%= review.review_text %></p>
-          <small>Posted on: <%= new Date(review.review_date).toLocaleDateString() %></small>
+          <strong class="review-author">
+            <%= review.inv_make %> <%= review.inv_model %>
+          </strong>
 
-          <form method="POST" action="/reviews/delete">
+          <p class="review-text"><%= review.review_text %></p>
+
+          <small class="review-date">
+            Posted on: <%= new Date(review.review_date).toLocaleDateString() %>
+          </small>
+
+          <form method="POST" action="/reviews/delete" class="review-delete-form">
             <input type="hidden" name="review_id" value="<%= review.review_id %>">
-            <button class="delete-review-btn">Delete</button>
+            <button class="delete-btn">Delete</button>
           </form>
         </li>
       <% }) %>
