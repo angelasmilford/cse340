@@ -1,6 +1,7 @@
 <main class="management-container">
+
   <!-- Page Title -->
-  <h1><%= title %></h1>
+  <h1 class="page-title"><%= title %></h1>
 
   <!-- Flash Messages -->
   <% if (messages && messages.length) { %>
@@ -13,31 +14,32 @@
     </div>
   <% } %>
 
-  <!-- Links to other inventory processes -->
-  <nav>
+  <!-- Action Navigation -->
+  <nav class="management-nav">
     <ul>
-      <li><a href="/inv/add-classification">Add New Classification</a></li>
-      <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
+      <li><a href="/inv/add-classification" class="nav-btn">➕ Add New Classification</a></li>
+      <li><a href="/inv/add-inventory" class="nav-btn">📦 Add New Inventory Item</a></li>
     </ul>
   </nav>
 
   <!-- Inventory Management Section -->
-  <section>
+  <section class="inventory-section card-section">
     <h2>Manage Inventory</h2>
-    <p>Select a classification from the list to see its inventory items.</p>
+    <p>Select a vehicle classification below to view and manage its inventory items.</p>
 
     <!-- Classification select list -->
-    <form id="classificationForm">
+    <form id="classificationForm" class="classification-form">
       <%- classificationSelect %>
     </form>
 
     <!-- Inventory display table -->
-    <table id="inventoryDisplay"></table>
-    <noscript>JavaScript must be enabled to use this page.</noscript>
+    <table id="inventoryDisplay" class="inventory-table"></table>
+
+    <noscript class="noscript-warning">
+      JavaScript must be enabled to use this page.
+    </noscript>
   </section>
 
-  <!-- Link to inventory.js -->
+  <!-- JS -->
   <script src="/js/inventory.js"></script>
 </main>
-
-

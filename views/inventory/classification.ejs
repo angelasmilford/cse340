@@ -1,7 +1,23 @@
-<% if (title) { %>
-  <h1><%= title %></h1>
-<% } %>
+<div class="classification-container">
 
-<%# messages() %>
+  <% if (title) { %>
+    <h1 class="classification-title"><%= title %></h1>
+  <% } %>
 
-<%- grid %>
+  <!-- Messages -->
+  <div class="classification-messages">
+    <% if (messages && messages.length) { %>
+      <ul>
+        <% messages.forEach(msg => { %>
+          <li><%= msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+
+  <!-- Vehicle grid -->
+  <div class="classification-grid">
+    <%- grid %>
+  </div>
+
+</div>
